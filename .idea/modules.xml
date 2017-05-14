@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Meva.iml" filepath="$PROJECT_DIR$/Meva.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/meva-android.iml" filepath="$PROJECT_DIR$/meva-android.iml" />
     </modules>
   </component>
 </project>
