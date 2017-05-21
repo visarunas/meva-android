@@ -63,7 +63,16 @@
         android:layout_marginEnd="19dp"
         tools:layout_constraintLeft_creator="1"
         android:layout_marginLeft="19dp"
-        android:layout_marginRight="19dp" />
+        android:layout_marginRight="19dp"
+        android:onClick="loginUser"/>
+
+    <TextView
+        android:id="@+id/login_error"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dip"
+        android:textColor="#e30000"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textViewRegister"
