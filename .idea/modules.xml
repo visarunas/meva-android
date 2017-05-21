@@ -5,7 +5,6 @@
       <module fileurl="file://$PROJECT_DIR$/MEVA repo.iml" filepath="$PROJECT_DIR$/MEVA repo.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/meva-android.iml" filepath="$PROJECT_DIR$/meva-android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/volley/volley.iml" filepath="$PROJECT_DIR$/volley/volley.iml" />
       <module fileurl="file://$PROJECT_DIR$/volley-master/volley-master2.iml" filepath="$PROJECT_DIR$/volley-master/volley-master2.iml" />
     </modules>
   </component>

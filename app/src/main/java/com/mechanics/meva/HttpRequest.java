@@ -2,8 +2,10 @@ package com.mechanics.meva;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -16,19 +18,17 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by Lenovo on 18-05-2017.
- */
-
 public class HttpRequest {
 
-    //returns json of get request
-    public static JSONObject httpGet (String urlString)
+    //returns list of JSONObject of get request
+    public static ArrayList<JSONObject> httpGet (String urlString)
     {
+        ArrayList<JSONObject> jsonList = new ArrayList<> ();
         URL url;
         try {
             url = new URL(urlString);
@@ -44,7 +44,16 @@ public class HttpRequest {
             }
             reader.close();
 
-            return new JSONObject(response);
+            Object jsonType = new JSONTokener(response).nextValue();
+            if (jsonType instanceof JSONObject)
+                jsonList.add (new JSONObject (response));
+            else if (jsonType instanceof JSONArray)
+            {
+                JSONArray jsonArray = new JSONArray (response);
+                for (int i = 0; i < jsonArray.length(); i++) {
+                    jsonList.add(jsonArray.getJSONObject(i));
+                }
+            }
 
         } catch (ProtocolException e) {
             e.printStackTrace();
@@ -57,7 +66,7 @@ public class HttpRequest {
         } catch (Throwable e){
             e.printStackTrace();
         }
-        return null;
+        return jsonList;
     }
 
     //returns true if success, flase if not
