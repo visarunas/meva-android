@@ -105,7 +105,7 @@ public class LoginActivity extends Activity {
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // error
+                        // error 
                         Log.d("Error.Response", error.toString());
                         prgDialog.hide();
                         Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
