@@ -20,10 +20,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 
 import java.io.IOException;
 import java.net.URI;
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class LoginActivity extends Activity {
@@ -55,16 +58,14 @@ public class LoginActivity extends Activity {
      * @param view
      */
     public void loginUser(View view){
-        // Get Email Edit View Value
+
         String email = emailET.getText().toString();
-        // Get Password Edit View Value
         String password = pwdET.getText().toString();
         // Instantiate Http Request Param Object
         // When Email Edit View and Password Edit View have values other than Null
         if(Utility.isNotNull(email) && Utility.isNotNull(password)){
             // When Email entered is Valid
             if(Utility.validate(email)){
-
                 invokeWS();
             }
             // When Email is invalid
@@ -85,40 +86,44 @@ public class LoginActivity extends Activity {
     public void invokeWS(){
         // Show Progress Dialog
         prgDialog.show();
-        String ip = getString(R.string.MevaWebIP);
+
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "https://postman-echo.com/get?test=123";
+        final String url = "http://jsonplaceholder.typicode.com/posts";
 
-
-        JsonObjectRequest getRequest = new JsonObjectRequest(Request.Method.GET, url, null,
-                new Response.Listener<JSONObject>()
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>()
                 {
                     @Override
-                    public void onResponse(JSONObject response) {
-                        // display response
+                    public void onResponse(String response) {
+                        Log.d("Response", response);
                         prgDialog.hide();
-                        Log.d("Response", response.toString());
-                        try {
-                            JSONObject obj = response.getJSONObject("headers");
-
-                            Toast.makeText(getApplicationContext(), obj.getString("host"), Toast.LENGTH_LONG).show();
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener()
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        // error
                         Log.d("Error.Response", error.toString());
                         prgDialog.hide();
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
-        );
+        ) {
+            @Override
+            protected Map<String, String> getParams()
+            {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("username", emailET.getText().toString());
+                params.put("password", pwdET.getText().toString());
 
-        queue.add(getRequest);
+                return params;
+            }
+        };
+        queue.add(postRequest);
+
     }
 
     public String getResult(Void... arg0){
