@@ -150,7 +150,7 @@ public class LoginActivity extends Activity {
      * Method which navigates from Login Activity to Home Activity
      */
     public void navigatetoHomeActivity(){
-        Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
+        Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(homeIntent);
     }
