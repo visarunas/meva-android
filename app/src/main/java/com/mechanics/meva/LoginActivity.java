@@ -20,6 +20,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
@@ -86,45 +87,49 @@ public class LoginActivity extends Activity {
      *
      */
 
+
     public void invokeWS(){
         // Show Progress Dialog
         prgDialog.show();
 
-
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "http://jsonplaceholder.typicode.com/posts";
+        final String url = "http://10.3.8.45:45455/api/Account/LogIn2";
+        //final String url = "https://postman-echo.com/post";
 
-        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
-                new Response.Listener<String>()
+        Map<String, String> params = new HashMap<String, String>();
+        params.put("userName", emailET.getText().toString());
+        params.put("password", pwdET.getText().toString());
+
+        JsonObjectRequest postRequest = new JsonObjectRequest(url, new JSONObject(params),
+                new Response.Listener<JSONObject>()
                 {
                     @Override
-                    public void onResponse(String response) {
-                        Log.d("Response", response);
+                    public void onResponse(JSONObject response) {
+                        Log.d("Response", response.toString());
                         prgDialog.hide();
-                        Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                        try {
+                            if(response.getString("Status").equals("OK")){
+                                navigatetoHomeActivity();
+                            }
+                            //Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     }
                 },
                 new Response.ErrorListener()
                 {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // error 
+                        // error
                         Log.d("Error.Response", error.toString());
                         prgDialog.hide();
                         Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
-        ) {
-            @Override
-            protected Map<String, String> getParams()
-            {
-                Map<String, String> params = new HashMap<String, String>();
-                params.put("username", emailET.getText().toString());
-                params.put("password", pwdET.getText().toString());
+        )
 
-                return params;
-            }
-        };
+        ;
         queue.add(postRequest);
 
     }
@@ -145,7 +150,7 @@ public class LoginActivity extends Activity {
      * Method which navigates from Login Activity to Home Activity
      */
     public void navigatetoHomeActivity(){
-        Intent homeIntent = new Intent(getApplicationContext(), UserAreaActivity.class);
+        Intent homeIntent = new Intent(getApplicationContext(), MainActivity.class);
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(homeIntent);
     }
