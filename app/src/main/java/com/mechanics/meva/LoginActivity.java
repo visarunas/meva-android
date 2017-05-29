@@ -62,7 +62,7 @@ public class LoginActivity extends Activity {
      * @param view
      */
     public void loginUser(View view){
-        navigatetoUserProfileActivity();
+        //navigatetoUserProfileActivity();
         String email = emailET.getText().toString();
         String password = pwdET.getText().toString();
         // Instantiate Http Request Param Object
@@ -109,7 +109,7 @@ public class LoginActivity extends Activity {
                         prgDialog.hide();
                         try {
                             if(response.getString("Status").equals("OK")){
-                                navigatetoHomeActivity();
+                                navigatetoUserProfileActivity();
                             }
                             //Toast.makeText(getApplicationContext(), response.toString(), Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
@@ -127,9 +127,7 @@ public class LoginActivity extends Activity {
                         Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
                     }
                 }
-        )
-
-        ;
+        );
         queue.add(postRequest);
 
     }

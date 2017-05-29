@@ -69,8 +69,6 @@ public class ReportController {
         JSONObject jsonObject= new JSONObject();
         try {
             jsonObject.put("id", report.ID);
-            jsonObject.put("isRead", report.isRead);
-            jsonObject.put("isMarked", report.isMarked);
             jsonObject.put("cause", report.cause);
             jsonObject.put("accountID", report.accountID);
             return jsonObject.toString();
