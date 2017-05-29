@@ -8,7 +8,7 @@
 
     <string name="facebook_app_id">1168273196615654</string>
     <string name="fb_login_protocol_scheme">fb1168273196615654</string>
-    <string name="MevaWebIP">192.168.1.117:45455</string>
+    <string name="MevaWebIP">http://10.3.8.45:45455/api/</string>
     <string name="title_activity_home">HomeActivity</string>
 
 </resources>

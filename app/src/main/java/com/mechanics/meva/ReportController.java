@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.TimeoutException;
 
 import static com.facebook.FacebookSdk.getApplicationContext;
 
@@ -25,16 +26,14 @@ import static com.facebook.FacebookSdk.getApplicationContext;
  */
 
 public class ReportController {
-    ProgressDialog prgDialog;
     public ReportController(){
 
     }
 
     public void sendReport(Report report) throws JSONException {
-        //prgDialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
-        final String url = "http://10.3.8.45:45455/api/Account/SendReport";
+        final String url = getApplicationContext().getString(R.string.MevaWebIP) + "Report/SendReport";
 
         JsonObjectRequest postRequest = new JsonObjectRequest(url, new JSONObject(reportToJSON(report)),
                 new Response.Listener<JSONObject>()
@@ -42,10 +41,8 @@ public class ReportController {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("Response", response.toString());
-                        //prgDialog.hide();
                         try {
                             if(response.getString("Status").equals("OK")){
-                                return;
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -58,9 +55,9 @@ public class ReportController {
                     public void onErrorResponse(VolleyError error) {
                         // error
                         Log.d("Error.Response", error.toString());
-                        //prgDialog.hide();
-                        //Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
-                        return;
+
+                        Toast.makeText(getApplicationContext(), error.toString(), Toast.LENGTH_LONG).show();
+                        //return;
                     }
                 }
         );

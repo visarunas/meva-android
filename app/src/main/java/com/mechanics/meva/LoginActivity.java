@@ -93,7 +93,7 @@ public class LoginActivity extends Activity {
         prgDialog.show();
 
         RequestQueue queue = Volley.newRequestQueue(this);
-        final String url = "http://10.3.8.45:45455/api/Account/LogIn2";
+        final String url = getApplicationContext().getString(R.string.MevaWebIP) + "Account/LogIn2";
         //final String url = "https://postman-echo.com/post";
 
         Map<String, String> params = new HashMap<String, String>();

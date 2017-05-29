@@ -12,6 +12,7 @@ public class Account {
     public String employer;
     public boolean isBanned;
     public String banMessage;
+    public String email;
 
     public Account(){
         isBanned = false;
