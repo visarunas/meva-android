@@ -72,7 +72,7 @@ public class ReportController {
             jsonObject.put("isRead", report.isRead);
             jsonObject.put("isMarked", report.isMarked);
             jsonObject.put("cause", report.cause);
-            jsonObject.put("account", report.account);
+            jsonObject.put("accountID", report.accountID);
             return jsonObject.toString();
         } catch (JSONException e) {
             // TODO Auto-generated catch block

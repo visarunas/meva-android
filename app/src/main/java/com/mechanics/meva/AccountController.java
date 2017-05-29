@@ -73,6 +73,7 @@ public class AccountController {
         if (responseHolder[0] instanceof VolleyError) {
             final VolleyError volleyError = (VolleyError) responseHolder[0];
             Toast.makeText(getApplicationContext(), volleyError.toString(), Toast.LENGTH_LONG).show();
+            return acc;
         } else {
             final JSONObject response = (JSONObject) responseHolder[0];
             try {

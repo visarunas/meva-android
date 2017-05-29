@@ -9,13 +9,13 @@ public class Report {
     public boolean isRead;
     public String cause;
     public boolean isMarked;
-    public Account account;
+    public String accountID;
 
     public Report(String message){
         isMarked = false;
         isRead = false;
         cause = message;
         ID = "";
-        account = new Account();
+        accountID = "";
     }
 }
