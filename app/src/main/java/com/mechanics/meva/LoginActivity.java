@@ -62,7 +62,7 @@ public class LoginActivity extends Activity {
      * @param view
      */
     public void loginUser(View view){
-
+        navigatetoUserProfileActivity();
         String email = emailET.getText().toString();
         String password = pwdET.getText().toString();
         // Instantiate Http Request Param Object
@@ -154,6 +154,10 @@ public class LoginActivity extends Activity {
         homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(homeIntent);
     }
-
+    public void navigatetoUserProfileActivity(){
+        Intent homeIntent = new Intent(getApplicationContext(), UserProfileActivity.class);
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
+    }
 
 }
