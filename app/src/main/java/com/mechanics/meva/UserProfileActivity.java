@@ -1,5 +1,6 @@
 package com.mechanics.meva;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +15,8 @@ public class UserProfileActivity extends AppCompatActivity {
     }
 
     public void navigateToReportActivity(View view){
-        Toast.makeText(getApplicationContext(), "Creating report", Toast.LENGTH_LONG).show();
+        Intent homeIntent = new Intent(getApplicationContext(), ReportWritingActivity.class);
+        homeIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(homeIntent);
     }
 }
